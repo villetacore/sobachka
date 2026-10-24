@@ -1,0 +1,28 @@
+services:
+  postgres:
+    mem_limit: 384m
+    cpus: 0.5
+    healthcheck:
+      retries: 60
+      start_period: 30s
+    logging:
+      driver: json-file
+      options: {max-size: '10m', max-file: '3'}
+  backend:
+    mem_limit: 256m
+    cpus: 0.75
+    logging:
+      driver: json-file
+      options: {max-size: '10m', max-file: '3'}
+  ml:
+    mem_limit: 1536m
+    cpus: 1.5
+    logging:
+      driver: json-file
+      options: {max-size: '10m', max-file: '3'}
+  web:
+    mem_limit: 128m
+    cpus: 0.25
+    logging:
+      driver: json-file
+      options: {max-size: '10m', max-file: '3'}

@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Пример: RSS-лента",
+    "kind": "rss",
+    "url": "https://example.com/projects.rss",
+    "interval_sec": 300,
+    "note": "Любая RSS/Atom-лента заказов"
+  },
+  {
+    "name": "Пример: страница со списком",
+    "kind": "html",
+    "url": "https://example.com/tasks/",
+    "pattern": "/tasks/\\d+",
+    "interval_sec": 600,
+    "note": "Ссылки на заказы ищутся по регулярному выражению, описание — со страницы заказа"
+  },
+  {
+    "name": "Пример: карточки вперемешку с рекламой",
+    "kind": "html",
+    "url": "https://example.org/board/",
+    "pattern": "/board/item/\\d+/",
+    "interval_sec": 1800,
+    "note": "Берутся только карточки, где есть «Заказ»",
+    "config": {
+      "card": "<div class=\"card ",
+      "include": "class=\"card-type\">Заказ",
+      "details_from": "Описание",
+      "details_to": "Вложения",
+      "fields": {
+        "title": "<h2[^>]*><a[^>]*>(.*?)</a>",
+        "published": "от (\\d{2}\\.\\d{2}\\.\\d{4})",
+        "time_format": "02.01.2006",
+        "timezone": "+03:00",
+        "category": "class=\"card-type\">([^<]*)"
+      }
+    }
+  },
+  {
+    "name": "Пример: JSON API",
+    "kind": "json",
+    "url": "https://example.net/api/orders",
+    "interval_sec": 600,
+    "note": "Заказы из API, которым пользуется сам сайт",
+    "config": {
+      "method": "GET",
+      "page_param": "page",
+      "pages": 3,
+      "items": "data.orders|orders",
+      "filter": { "status": "open" },
+      "fields": {
+        "id": "id",
+        "title": "title",
+        "description": "description",
+        "url": "https://example.net/orders/{id}",
+        "category": "{type} / {tags}",
+        "budget_min": "budget.min",
+        "budget_max": "budget.max",
+        "currency": "budget.currency",
+        "published": "created_at"
+      }
+    }
+  }
+]

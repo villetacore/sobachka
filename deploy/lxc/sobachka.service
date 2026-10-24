@@ -1,0 +1,19 @@
+[Unit]
+Description=Sobachka application stack
+Requires=docker.service wg-quick@wgsobachka.service
+After=docker.service wg-quick@wgsobachka.service network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/sobachka
+ExecStart=/usr/bin/docker compose -f docker-compose.yml -f compose.deploy.yml up -d --no-build
+ExecStop=/usr/bin/docker compose -f docker-compose.yml -f compose.deploy.yml stop -t 120
+Restart=on-failure
+RestartSec=15s
+TimeoutStartSec=600
+TimeoutStopSec=180
+
+[Install]
+WantedBy=multi-user.target

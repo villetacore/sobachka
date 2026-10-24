@@ -1,0 +1,28 @@
+# Секреты и личные данные — не публикуются
+.env
+.env.*
+!.env.example
+DEPLOY-ACCESS.txt
+*.local.md
+deploy/lxc/*.conf
+!deploy/lxc/ssh-hardening.conf
+!deploy/lxc/wg-network-online.conf
+
+# Сборка и зависимости
+web/node_modules/
+web/dist/
+*.tsbuildinfo
+backend/server
+ml/models/
+ml/.venv/
+__pycache__/
+*.pyc
+
+# Системное и редакторы
+.DS_Store
+.idea/
+.vscode/
+.claude/
+
+# Готовые площадки конкретной установки (пример — config/presets.example.json)
+config/presets.json

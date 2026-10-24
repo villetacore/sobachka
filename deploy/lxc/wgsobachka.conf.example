@@ -1,0 +1,9 @@
+[Interface]
+Address = 10.10.0.2/30
+PrivateKey = <LXC_PRIVATE_KEY>
+
+[Peer]
+PublicKey = <VPN_GATEWAY_PUBLIC_KEY>
+Endpoint = <VPN_GATEWAY_IP>:51824
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
